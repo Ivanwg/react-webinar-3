@@ -6,7 +6,6 @@
 
 export const checkEndingTime = (numb) => {
   const numbString = numb.toString();
-  console.log(toString)
   const words = ['раз', 'раза', 'раз'];
   return `${numbString} ` + words[(numb % 100 > 4 && numb % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(numb % 10 < 5) ? numb % 10 : 5]];
 }
