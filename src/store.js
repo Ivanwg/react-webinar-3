@@ -1,10 +1,9 @@
-import { getRandomString } from './utils/getRandomString';
-
 /**
  * Хранилище состояния приложения
  */
 class Store {
   constructor(initState = {}) {
+    this.initialIndexId = 0;
     this.state = this.fillWithRandomKey(initState);
     this.listeners = []; // Слушатели изменений состояния
   }
@@ -46,7 +45,7 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: getRandomString(), title: 'Новая запись'}]
+      list: [...this.state.list, {code: ++this.initialIndexId, title: 'Новая запись'}]
     })
   };
 
@@ -94,7 +93,7 @@ class Store {
 
   fillWithRandomKey(storeObj) {
     if ('list' in storeObj && storeObj.list.length) {
-      storeObj.list.map(itemObj => Object.assign(itemObj, {code: getRandomString()}));
+      storeObj.list.map(itemObj => Object.assign(itemObj, {code: ++this.initialIndexId}));
     }
     return storeObj;
   }
