@@ -30,8 +30,12 @@ function App({store}) {
 
   return (
     <PageLayout>
-      <Head title='Магазин' bottomContent={<Cart />}/>
-      <Controls onAdd={callbacks.onAddItem}/>
+      <Head>
+        <h1>Магазин</h1>
+      </Head>
+      <Controls onAdd={callbacks.onAddItem}>
+        <Cart/>
+      </Controls>
       <List list={list}
             onDeleteItem={callbacks.onDeleteItem}
             onSelectItem={callbacks.onSelectItem}/>
