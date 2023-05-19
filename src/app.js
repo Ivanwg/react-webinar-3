@@ -1,8 +1,9 @@
 import React, {useCallback} from 'react';
-import List from "./components/list";
-import Controls from "./components/controls";
-import Head from "./components/head";
-import PageLayout from "./components/page-layout";
+import List from './components/list';
+import Controls from './components/controls';
+import Head from './components/head';
+import PageLayout from './components/page-layout';
+import Cart from './components/cart';
 
 /**
  * Приложение
@@ -29,7 +30,7 @@ function App({store}) {
 
   return (
     <PageLayout>
-      <Head title='Приложение на чистом JS'/>
+      <Head title='Магазин' bottomContent={<Cart />}/>
       <Controls onAdd={callbacks.onAddItem}/>
       <List list={list}
             onDeleteItem={callbacks.onDeleteItem}
