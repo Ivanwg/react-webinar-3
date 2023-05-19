@@ -11,6 +11,9 @@ function Cart(){
   const price = 11;
 
   const [isModal, setIsModal] = useState(true);
+  const callbacks = {
+    onModalClose: () => setIsModal(false)
+  }
 
   return (
     <>
@@ -22,7 +25,7 @@ function Cart(){
         <button className={cn('btn')}>Перейти</button>
       </div>
       {isModal &&
-      <Modal title='Корзина'>
+      <Modal title='Корзина' onClose={callbacks.onModalClose}>
          
       </Modal>}
     </>

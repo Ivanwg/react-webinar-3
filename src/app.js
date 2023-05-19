@@ -19,10 +19,6 @@ function App({store}) {
       store.deleteItem(code);
     }, [store]),
 
-    onSelectItem: useCallback((code) => {
-      store.selectItem(code);
-    }, [store]),
-
     onAddItem: useCallback(() => {
       store.addItem();
     }, [store])

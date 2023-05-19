@@ -6,7 +6,7 @@ import './style.css';
 import Head from '../head';
 import Controls from '../controls';
 
-function Modal({title, controls, mainContent}){
+function Modal({title, controls, mainContent, onClose}){
   const cn = bem('Modal');
 
   return (
@@ -14,7 +14,7 @@ function Modal({title, controls, mainContent}){
       <div className={cn('content')}>
         <Head>
           <h2>{title}</h2>
-          <button>Закрыть</button>
+          <button onClick={onClose}>Закрыть</button>
         </Head>
         <Controls>
           {controls}
@@ -31,6 +31,7 @@ Modal.propTypes = {
   title: PropTypes.node,
   controls: PropTypes.node,
   mainContent: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 Modal.defaultProps = {
