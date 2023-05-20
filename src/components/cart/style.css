@@ -24,3 +24,18 @@
   letter-spacing: 0em;
   text-align: center;
 }
+
+.Cart-summary {
+  padding: 20px 100px 0 20px;
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.Cart-summary span {
+  padding-left: 53px;
+}

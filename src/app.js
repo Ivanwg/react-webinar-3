@@ -4,6 +4,7 @@ import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
 import Cart from './components/cart';
+import Item from './components/item';
 
 /**
  * Приложение
@@ -16,26 +17,26 @@ function App({store}) {
   const chosenItems = store.getChosen();
 
   const callbacks = {
-    onDeleteItem: useCallback((code) => {
-      store.deleteItem(code);
+    onCartRemoveItem: useCallback((code) => {
+      store.removeChosenItem(code);
     }, [store]),
 
     onChooseItem: useCallback((code) => {
       store.chooseItem(code);
-    }, [store])
+    }, [store]),
   }
+  
+  const listItem = useCallback(item => <Item item={item} onClick={callbacks.onChooseItem} actionName='Добавить'/>, []);
 
   return (
     <PageLayout>
       <Head>
         <h1>Магазин</h1>
       </Head>
-      <Controls onAdd={callbacks.onAddItem}>
-        <Cart chosenObject={chosenItems}/>
+      <Controls>
+        <Cart chosenObject={chosenItems} onRemove={callbacks.onCartRemoveItem}/>
       </Controls>
-      <List list={list}
-            onDeleteItem={callbacks.onDeleteItem}
-            onChooseItem={callbacks.onChooseItem}/>
+      <List list={list} childElem={listItem}/>
     </PageLayout>
   );
 }

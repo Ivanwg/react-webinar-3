@@ -23,9 +23,14 @@ function Item(props){
       <div className={cn('price')}>
         {formatPrice(props.item.price) + ' ₽'}
       </div>
+      {props.item.hasOwnProperty('count') && 
+        <div className={cn('count')}>
+          {`${props.item.count} шт`}
+        </div>
+      }
       <div className={cn('actions')}>
         <button onClick={callbacks.onClick}>
-          Добавить
+          {props.actionName}
         </button>
       </div>
     </div>
@@ -34,10 +39,12 @@ function Item(props){
 
 Item.propTypes = {
   item: PropTypes.shape({
-    code: PropTypes.number,
-    title: PropTypes.string,
-    price: PropTypes.number
+    code: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    count: PropTypes.number
   }).isRequired,
+  actionName: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };
 

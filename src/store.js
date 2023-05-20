@@ -100,6 +100,17 @@ class Store {
       for (const listener of this.listeners) listener();
     };
 
+        /**
+   * Удаление товара из корзины по коду
+   * @param code {Number}
+   */
+    removeChosenItem(code) {
+      if (this.chosenItems.hasOwnProperty(code)) {
+        delete this.chosenItems[code];
+        for (const listener of this.listeners) listener();
+      } 
+    };
+
     /**
    * Выбор выбранных товаров
    * @returns {Object}
