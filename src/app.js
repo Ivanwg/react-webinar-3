@@ -13,14 +13,15 @@ import Cart from './components/cart';
 function App({store}) {
 
   const list = store.getState().list;
+  const chosenItems = store.getChosen();
 
   const callbacks = {
     onDeleteItem: useCallback((code) => {
       store.deleteItem(code);
     }, [store]),
 
-    onAddItem: useCallback(() => {
-      store.addItem();
+    onChooseItem: useCallback((code) => {
+      store.chooseItem(code);
     }, [store])
   }
 
@@ -30,11 +31,11 @@ function App({store}) {
         <h1>Магазин</h1>
       </Head>
       <Controls onAdd={callbacks.onAddItem}>
-        <Cart/>
+        <Cart chosenObject={chosenItems}/>
       </Controls>
       <List list={list}
             onDeleteItem={callbacks.onDeleteItem}
-            onSelectItem={callbacks.onSelectItem}/>
+            onChooseItem={callbacks.onChooseItem}/>
     </PageLayout>
   );
 }

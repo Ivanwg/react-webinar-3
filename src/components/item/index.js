@@ -10,7 +10,7 @@ function Item(props){
 
   const callbacks = {
     onClick: () => {
-      
+      props.onClick(props.item.code);
     }
   }
 
@@ -38,11 +38,11 @@ Item.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number
   }).isRequired,
-  // onDelete: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 Item.defaultProps = {
-
+  onClick: () => {}
 }
 
 export default React.memo(Item);

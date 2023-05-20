@@ -61,11 +61,9 @@ export function formatPrice(price) {
   let res;
   try {
     res = (parseInt(price * 100)) / 100;
-
   }
   catch (err) {
     res = 0
   }
-  // return `${res}`;
   return new Intl.NumberFormat('ru-RU').format(res);
 }

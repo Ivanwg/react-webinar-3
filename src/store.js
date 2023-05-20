@@ -1,4 +1,4 @@
-import {generateCode} from "./utils";
+import {generateCode} from './utils';
 
 /**
  * Хранилище состояния приложения
@@ -7,7 +7,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
-    this.chosenItems = [];
+    this.chosenItems = {};
   }
 
   /**
@@ -83,6 +83,29 @@ class Store {
         return item.selected ? {...item, selected: false} : item;
       })
     })
+  }
+
+    /**
+   * Добавление в корзину по коду
+   * @param code {Number}
+   */
+    chooseItem(code) {
+      const targetObj = this.state.list.find(item => item.code === code);
+      if(!targetObj) return;
+      if (this.chosenItems.hasOwnProperty(code)) {
+        this.chosenItems[code].count += 1;
+      } else {
+        this.chosenItems[code] = {...targetObj, count: 1};
+      }
+      for (const listener of this.listeners) listener();
+    };
+
+    /**
+   * Выбор выбранных товаров
+   * @returns {Object}
+   */
+  getChosen() {
+    return this.chosenItems;
   }
 }
 

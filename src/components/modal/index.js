@@ -6,7 +6,7 @@ import './style.css';
 import Head from '../head';
 import Controls from '../controls';
 
-function Modal({title, controls, mainContent, onClose}){
+function Modal({title, controls, children, onClose}){
   const cn = bem('Modal');
 
   return (
@@ -20,7 +20,7 @@ function Modal({title, controls, mainContent, onClose}){
           {controls}
         </Controls>
         <div className={cn('data')}>
-          {mainContent}
+          {children}
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@ function Modal({title, controls, mainContent, onClose}){
 Modal.propTypes = {
   title: PropTypes.node,
   controls: PropTypes.node,
-  mainContent: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
