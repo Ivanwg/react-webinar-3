@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
-import { plural } from '../../utils';
 import './style.css';
 import Head from '../head';
 import Controls from '../controls';
