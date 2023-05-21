@@ -12,8 +12,7 @@ function Modal({title, controls, children, onClose}){
   return (
     <div className={cn()}>
       <div className={cn('content')}>
-        <Head>
-          <h2>{title}</h2>
+        <Head title={title}>
           <button onClick={onClose}>Закрыть</button>
         </Head>
         <Controls>

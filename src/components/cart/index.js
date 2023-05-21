@@ -7,10 +7,8 @@ import List from '../list';
 import Item from '../item';
 import './style.css';
 
-function Cart({chosenObject, onRemove}){
+function Cart({chosenObject, count, price, onRemove}){
   const cn = bem('Cart');
-  const count = Object.keys(chosenObject).length;
-  const price = formatPrice(Object.values(chosenObject).reduce((accumulator, item) => accumulator + item.count * item.price, 0)) + ' ₽';
   
   const [isModal, setIsModal] = useState(false);
   const callbacks = {
@@ -29,10 +27,11 @@ function Cart({chosenObject, onRemove}){
       <div className={cn()}>
         <div className={cn('preview')}>
           В корзине: 
-          <b>{count ? `${count} ${plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / ${price}` : 'Пусто'}</b>
+          <b>{count ? `${count} ${plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / ${formatPrice(price)} ₽` : 'Пусто'}</b>
         </div>
         <button className={cn('btn')} onClick={callbacks.onOpen}>Перейти</button>
       </div>
+      {/* Здесь ниже очень просится портал */}
       {isModal &&
       <Modal title='Корзина' onClose={callbacks.onModalClose}>
         {!count ? 
@@ -40,7 +39,7 @@ function Cart({chosenObject, onRemove}){
         <>
           <List list={(Object.values(chosenObject))} childElem={listItem}/>
           <div className={cn('summary')}>
-            Итого: <span>{price}</span>
+            Итого: <span>{`${formatPrice(price)} ₽`}</span>
           </div>
         </>}
       </Modal>}
@@ -56,6 +55,8 @@ Cart.propTypes = {
       price: PropTypes.number
     })
   }).isRequired,
+  count: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
   onRemove: PropTypes.func
 };
 

@@ -14,7 +14,7 @@ import Item from './components/item';
 function App({store}) {
 
   const list = store.getState().list;
-  const chosenItems = store.getChosen();
+  const chosenData = store.getChosen();
 
   const callbacks = {
     onCartRemoveItem: useCallback((code) => {
@@ -30,11 +30,9 @@ function App({store}) {
 
   return (
     <PageLayout>
-      <Head>
-        <h1>Магазин</h1>
-      </Head>
+      <Head title='Магазин'/>
       <Controls>
-        <Cart chosenObject={chosenItems} onRemove={callbacks.onCartRemoveItem}/>
+        <Cart chosenObject={chosenData.chosenItems} count={chosenData.count} price={chosenData.price} onRemove={callbacks.onCartRemoveItem}/>
       </Controls>
       <List list={list} childElem={listItem}/>
     </PageLayout>

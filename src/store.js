@@ -116,7 +116,11 @@ class Store {
    * @returns {Object}
    */
   getChosen() {
-    return this.chosenItems;
+    return {
+      chosenItems: this.chosenItems,
+      count: Object.keys(this.chosenItems).length,
+      price: Object.values(this.chosenItems).reduce((accumulator, item) => accumulator + item.count * item.price, 0)
+    };
   }
 }
 
