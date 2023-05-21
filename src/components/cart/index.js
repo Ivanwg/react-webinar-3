@@ -15,7 +15,7 @@ function Cart({count, price, onClick}){
       <div className={cn()}>
         <div className={cn('preview')}>
           В корзине: 
-          <b>{count ? `${count} ${plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / ${formatPrice(price)} ₽` : 'Пусто'}</b>
+          <b>{count ? `${count} ${plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / ${formatPrice(price)} ₽` : 'пусто'}</b>
         </div>
         <button className={cn('btn')} onClick={onClick}>Перейти</button>
       </div>
@@ -33,4 +33,4 @@ List.defaultProps = {
   onClick: () => {},
 }
 
-export default Cart;
+export default React.memo(Cart);

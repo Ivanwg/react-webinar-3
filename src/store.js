@@ -86,18 +86,35 @@ class Store {
   }
 
     /**
+   * Установка выбранных товаров
+   * @param newState {Object}
+   */
+    setChosen(newState) {
+      this.chosenItems = newState;
+      // Вызываем всех слушателей
+      for (const listener of this.listeners) listener();
+    }
+
+    /**
    * Добавление в корзину по коду
    * @param code {Number}
    */
     chooseItem(code) {
       const targetObj = this.state.list.find(item => item.code === code);
       if(!targetObj) return;
+      let newItem = {};
       if (this.chosenItems.hasOwnProperty(code)) {
-        this.chosenItems[code].count += 1;
+        newItem[code] = {
+          ...targetObj, 
+          count: this.chosenItems[code].count + 1
+        }
       } else {
-        this.chosenItems[code] = {...targetObj, count: 1};
+        newItem[code] = {...targetObj, count: 1};
       }
-      for (const listener of this.listeners) listener();
+      this.setChosen({
+        ...this.chosenItems,
+        ...newItem
+      })
     };
 
         /**
