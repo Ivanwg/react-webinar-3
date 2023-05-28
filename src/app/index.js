@@ -5,6 +5,7 @@ import Basket from './basket';
 import useStore from '../store/use-store';
 import useSelector from '../store/use-selector';
 import Product from './product';
+import DetectLocation from './detect-location';
 
 /**
  * Приложение
@@ -23,6 +24,7 @@ function App() {
           <Route path='*' element={<Navigate to='/'/>} />
         </Routes>
         {activeModal === 'basket' && <Basket/>}
+        <DetectLocation/>
       </BrowserRouter>
     </>
   );

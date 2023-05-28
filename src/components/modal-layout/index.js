@@ -12,6 +12,9 @@ function ModalLayout(props) {
   const layout = useRef();
   const frame = useRef();
   useEffect(() => {
+    if (!layout.current.style.alignItems || layout.current.style.justifyContent) {
+      return;
+    }
     const resizeObserver = new ResizeObserver(() => {
       // Центрирование frame или его прижатие к краю, если размеры больше чем у layout
       layout.current.style.alignItems = (layout.current.clientHeight < frame.current.clientHeight)

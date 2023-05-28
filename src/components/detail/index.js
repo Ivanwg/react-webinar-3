@@ -20,7 +20,7 @@ function Detail({desc, price, madeInCountry, madeInCode, category, year, onAdd})
       <p className={cn('desc')}>{_('year')}: 
         <b>{year}</b>
       </p>
-      <p className={cn('price')}>{_('price')}: {numberFormat(price)}₽</p>
+      <p className={cn('price')}>{_('price')}: {numberFormat(price)} ₽</p>
       <button onClick={onAdd}>{_('addAction')}</button>
     </div>
   );
