@@ -2,24 +2,26 @@ import {memo} from 'react';
 import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat} from '../../utils';
+import useTranslate from '../../hooks/useTranslate';
 import './style.css';
 
 function Detail({desc, price, madeInCountry, madeInCode, category, year, onAdd}) {
+  const _ = useTranslate();
   const cn = bem('Detail');
   return (
     <div className={cn()}>
       <p className={cn('desc')}>{desc}</p>
-      <p className={cn('desc')}>Страна производитель: 
+      <p className={cn('desc')}>{_('countryName')}: 
         <b>{madeInCountry} ({madeInCode})</b>
       </p>
-      <p className={cn('desc')}>Категория: 
+      <p className={cn('desc')}>{_('category')}: 
         <b>{category}</b>
       </p>
-      <p className={cn('desc')}>Год выпуска: 
+      <p className={cn('desc')}>{_('year')}: 
         <b>{year}</b>
       </p>
-      <p className={cn('price')}>Цена: {numberFormat(price)}₽</p>
-      <button onClick={onAdd}>Добавить</button>
+      <p className={cn('price')}>{_('price')}: {numberFormat(price)}₽</p>
+      <button onClick={onAdd}>{_('addAction')}</button>
     </div>
   );
 }

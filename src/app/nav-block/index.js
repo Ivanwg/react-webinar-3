@@ -6,12 +6,14 @@ import BasketTool from '../../components/basket-tool';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import {Link} from 'react-router-dom';
+import useTranslate from '../../hooks/useTranslate';
 import './style.css';
 
 
 function NavBlock() {
 
   const store = useStore();
+  const _ = useTranslate();
 
   const select = useSelector(state => ({
     amount: state.basket.amount,
@@ -24,7 +26,7 @@ function NavBlock() {
 
   return (
     <div className='NavBlock'>
-      <Link to={'/'} className='NavBlock-link'>Главная</Link>
+      <Link to={'/'} className='NavBlock-link'>{_('toMainLink')}</Link>
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                     sum={select.sum}/>
     </div>

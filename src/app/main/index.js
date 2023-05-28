@@ -7,10 +7,13 @@ import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import NavBlock from '../nav-block';
+import LangSwitch from '../../components/lang-switch';
+import useTranslate from '../../hooks/useTranslate';
 
 function Main() {
 
   const store = useStore();
+  const _ = useTranslate();
 
   useEffect(() => {
     store.actions.catalog.load();
@@ -18,12 +21,16 @@ function Main() {
   }, []);
 
   const select = useSelector(state => ({
-    list: state.catalog.list
+    list: state.catalog.list,
+    activeLang: state.language.code,
+    langsList: state.language.codes
   }));
 
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
+    // Переключение языка
+    switchLanguage: useCallback(code => store.actions.language.switch(code), [store]),
   }
 
   const renders = {
@@ -34,7 +41,9 @@ function Main() {
 
   return (
     <PageLayout>
-      <Head title='Магазин'/>
+      <Head title={_('mainTitle')}>
+        <LangSwitch onClick={callbacks.switchLanguage} defaulCode={select.activeLang} codesArr={select.langsList}/>
+      </Head>
       <NavBlock/>
       <List list={select.list} renderItem={renders.item}/>
     </PageLayout>

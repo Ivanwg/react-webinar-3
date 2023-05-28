@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat} from '../../utils';
 import ProductLink from '../product-link';
+import useTranslate from '../../hooks/useTranslate';
 import './style.css';
 
 function Item(props){
-
+  const _ = useTranslate();
   const cn = bem('Item');
 
   const callbacks = {
@@ -21,7 +22,7 @@ function Item(props){
       </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <button onClick={callbacks.onAdd}>{_('addAction')}</button>
       </div>
     </div>
   );
