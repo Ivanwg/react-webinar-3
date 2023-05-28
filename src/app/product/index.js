@@ -1,40 +1,39 @@
 import {memo, useCallback, useEffect} from 'react';
-import Item from '../../components/item';
 import PageLayout from '../../components/page-layout';
 import Head from '../../components/head';
-import BasketTool from '../../components/basket-tool';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import NavBlock from '../nav-block';
+import Detail from '../../components/detail';
+import { useLocation } from 'react-router-dom';
+import { locationParam } from '../../utils';
 
 function Product() {
-
+  const location = useLocation();
+  const pageId = locationParam(location);
   const store = useStore();
-
+  
   useEffect(() => {
-    store.actions.catalog.load();
-  }, []);
+    // store.actions.modals.close();
+    store.actions.product.load(pageId);
+  }, [pageId]);
 
   const select = useSelector(state => ({
-    list: state.catalog.list
+    product: state.product.product
   }));
 
   const callbacks = {
     // Добавление в корзину
-    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
+    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store])
   }
-
-  const renders = {
-    item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
-    }, [callbacks.addToBasket]),
-  };
 
   return (
     <PageLayout>
-      <Head title='Товар'/>
+      <Head title={select.product.title ? select.product.title : ''}/>
       <NavBlock/>
-      Детальная страница
+      {Object.keys(select.product).length ? <Detail desc={select.product.description} price={select.product.price} madeInCountry={select.product.madeIn.title}
+                madeInCode={select.product.madeIn.code} category={select.product.category.title} year={select.product.edition}
+                    onAdd={() => callbacks.addToBasket(pageId)}/> : ''}
     </PageLayout>
 
   );

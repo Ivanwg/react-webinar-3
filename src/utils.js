@@ -33,3 +33,14 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+
+/**
+ * Получение параметра по location pathname
+ * @param location {String}
+ * @param index {Number}
+ * @returns {String}
+ */
+ export function locationParam(location, index=2) {
+  return location.pathname.split('/')[index];
+}

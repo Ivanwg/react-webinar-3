@@ -14,6 +14,7 @@ function Main() {
 
   useEffect(() => {
     store.actions.catalog.load();
+    store.actions.product.clear();
   }, []);
 
   const select = useSelector(state => ({

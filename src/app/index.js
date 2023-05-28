@@ -13,17 +13,21 @@ import Product from './product';
 function App() {
 
   const activeModal = useSelector(state => state.modals.name);
+  const language = useSelector(state => state.language.code);
+  console.log(language)
 
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Main/>} />
-          <Route path='/product/:id' element={<Product />} />
-          <Route path='*' element={<Navigate to='/' />} />
+          <Route path='/product/:id' element={<Product/>} />
+          <Route path='*' element={<Navigate to='/'/>} />
         </Routes>
+
+        {/* Внутри Item внутри модалки использован Link, поэтому вставлено здесь */}
+        {activeModal === 'basket' && <Basket/>}
       </BrowserRouter>
-      {activeModal === 'basket' && <Basket/>}
     </>
   );
 }
